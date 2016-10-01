@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  background-color: black;
+  width: 1366px;
+  height: 768px;
+  overflow: hidden;
+}
+
+* {
+  font-family: monospace;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 11px;
+  line-height: 12px;
+}
+
+#grid {
+  width: 979px;
+  height: 663px;
+  position: absolute;
+  right: 33px;
+  top: 51px;
+}
+
+.node {
+  width: 205px;
+  height: 189px;
+  border: 3px double white;
+  display: inline-block;
+}
+.node.margin-top {
+  margin-top: 39px;
+}
+.node.margin-left {
+  margin-left: 45px;
+}
+
+.node textarea {
+  background-color: black;
+  color: white;
+  resize: none;
+  border: none;
+  padding: 4px 3px 5px;
+  margin: 0;
+  border-right: 3px double white;
+  width: 151px;
+  height: 180px;
+}
