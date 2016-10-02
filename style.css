@@ -54,6 +54,20 @@ body {
   outline: none;
 }
 
+.node .data {
+  width: 45px;
+  height: 35px;
+  border: 1px solid white;
+  position: absolute;
+  right: 1px;
+}
+.node .acc, .node .idle { height: 36px; }
+.node .acc { top: 1px; }
+.node .bak { top: 40px; }
+.node .last { top: 78px; }
+.node .mode  { top: 116px; }
+.node .idle { top: 154px; }
+
 .arrow {
   background-image: url("spritesheet.png");
   background-repeat: no-repeat;
