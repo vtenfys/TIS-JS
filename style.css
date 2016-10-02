@@ -1,6 +1,7 @@
 body {
   margin: 0;
   background-color: black;
+  position: relative;
   width: 1366px;
   height: 768px;
   overflow: hidden;
@@ -27,6 +28,7 @@ body {
   height: 189px;
   border: 3px double white;
   display: inline-block;
+  position: relative;
 }
 .node.margin-top {
   margin-top: 39px;
@@ -45,4 +47,31 @@ body {
   border-right: 3px double white;
   width: 151px;
   height: 180px;
+}
+
+.arrow {
+  background-image: url("img/arrow.png");
+  background-repeat: no-repeat;
+  width: 10px;
+  height: 20px;
+  position: absolute;
+}
+.arrow.left {
+  transform: rotateZ(-90deg);
+  bottom: 68px;
+  left: -30px;
+}
+.arrow.right {
+  transform: rotateZ(90deg);
+  bottom: 102px;
+  left: -30px;
+}
+.arrow.up {
+  top: -34px;
+  left: 78px;
+}
+.arrow.down {
+  transform: rotateZ(180deg);
+  top: -33px;
+  left: 117px;
 }
