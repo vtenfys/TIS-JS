@@ -9,6 +9,7 @@ body {
 
 * {
   font-family: monospace;
+  font-weight: bold;
   letter-spacing: 1px;
   text-transform: uppercase;
   font-size: 11px;
@@ -25,14 +26,14 @@ body {
 }
 
 .node {
-  width: 205px;
-  height: 189px;
-  border: 3px double white;
+  width: 209px;
+  height: 193px;
+  border: 1px solid white;
   display: inline-block;
   position: relative;
 }
 .node.margin-top {
-  margin-top: 39px;
+  margin-top: 38px;
 }
 .node.margin-left {
   margin-left: 45px;
@@ -43,16 +44,16 @@ body {
   color: white;
   resize: none;
   border: none;
-  padding: 4px 3px 5px;
-  margin: 0;
-  border-right: 3px double white;
+  padding: 5px 3px 4px;
+  margin: 1px 0 0 1px;
+  border: 1px solid white;
   width: 151px;
   height: 180px;
   outline: none;
 }
 
 .arrow {
-  background-image: url("img/arrow.png");
+  background-image: url("spritesheet.png");
   background-repeat: no-repeat;
   width: 10px;
   height: 20px;
@@ -60,20 +61,20 @@ body {
 }
 .arrow.left {
   transform: rotateZ(-90deg);
-  bottom: 68px;
-  left: -30px;
+  bottom: 70px;
+  left: -28px;
 }
 .arrow.right {
   transform: rotateZ(90deg);
-  bottom: 102px;
-  left: -30px;
+  bottom: 104px;
+  left: -28px;
 }
 .arrow.up {
-  top: -34px;
-  left: 78px;
+  top: -32px;
+  left: 80px;
 }
 .arrow.down {
   transform: rotateZ(180deg);
-  top: -33px;
-  left: 117px;
+  top: -31px;
+  left: 119px;
 }
