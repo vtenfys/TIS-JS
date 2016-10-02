@@ -1,6 +1,7 @@
 /* This file is licensed under the MIT License. See LICENSE for details. */
 
 var node = [];
+var save = [];
 
 for (let i = 0; i < 12; i += 1) {
   node[i] = document.createElement("div");
@@ -14,9 +15,12 @@ for (let i = 0; i < 12; i += 1) {
     var text = this.value.split("\n");
     for (let i = 0; i < text.length; i += 1) {
       if (text[i].length > 18) text[i] = text[i].substring(0, 18);
-      text[i] = text[i].toUpperCase();
+      text[i] = text[i].toLowerCase();
     }
-    this.value = text.join('\n');
+    this.value = text.slice(0, 15).join('\n');
+
+    save[i] = this.value;
+    window.name = JSON.stringify(save);
   });
 
   node[i].appendChild(node[i].code);
@@ -56,4 +60,26 @@ for (let i = 0; i < 12; i += 1) {
   }
 }
 
-var TIS = {};
+if (window.name !== "") {
+  save = JSON.parse(window.name);
+  for (let i = 0; i < 12; i += 1) {
+    node[i].code.value = save[i] || "";
+  }
+}
+
+var TIS = {
+  runCmd: function (cmd, node) {
+    cmd = cmd.replace(/((\s)\s+)|,/g, "$2").split(" ");
+    if ((!cmd[0][0]) || cmd[0][0] === "#") return;
+
+    if (cmd[0] === "nop") {
+      if (cmd[1]) throw new SyntaxError("too many operands");
+      return;
+    }
+
+    if (cmd[0] === "mov") {
+      if (cmd.length < 3) throw new SyntaxError("missing operand");
+      if (cmd.length > 3) throw new SyntaxError("too many operands");
+    }
+  }
+};
