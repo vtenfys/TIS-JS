@@ -72,6 +72,13 @@ var TIS = {
     cmd = cmd.replace(/((\s)\s+)|,/g, "$2").split(" ");
     if ((!cmd[0][0]) || cmd[0][0] === "#") return;
 
+    for (let i = 1; i < cmd.length; i += 1) {
+      if (cmd[i][0] === "#") {
+        cmd = cmd.slice(0, i);
+        break;
+      }
+    }
+
     if (cmd[0] === "nop") {
       if (cmd[1]) throw new SyntaxError("too many operands");
       return;
