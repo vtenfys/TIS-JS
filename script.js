@@ -1,3 +1,5 @@
+/* This file is licensed under the MIT License. See LICENSE for details. */
+
 var node = [];
 
 for (let i = 0; i < 12; i += 1) {
