@@ -112,6 +112,12 @@ var TIS = {
       TIS.add(nodei, cmd[1]);
     }
 
+    else if (cmd[0] === "sub") {
+      if (cmd.length < 2) throw new SyntaxError("missing operand");
+      if (cmd.length > 2) throw new SyntaxError("too many operands");
+      TIS.sub(nodei, cmd[1]);
+    }
+
     else {
       throw new SyntaxError('invalid opcode "' + cmd[0] + '"');
     }
@@ -201,5 +207,10 @@ var TIS = {
   add: function (nodei, src) {
     var acc = parseInt(TIS.getAcc(nodei));
     TIS.setAcc(nodei, (acc + parseInt(src)).toString());
+  },
+
+  sub: function (nodei, src) {
+    var acc = parseInt(TIS.getAcc(nodei));
+    TIS.setAcc(nodei, (acc - parseInt(src)).toString());
   }
 };
