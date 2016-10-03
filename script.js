@@ -109,7 +109,7 @@ var TIS = {
         }
       } else if (dst === "acc") {
         node[nodei].acc.setAttribute("data-value", src);
-      } else {
+      } else if (dst === "nil") ; else {
         throw new ReferenceError('invalid register "' + dst + '"');
       }
     } else if (["up", "right", "down", "left"].indexOf(src) !== -1) {
@@ -141,6 +141,8 @@ var TIS = {
       }
     } else if (src === "acc") {
       TIS.mov(nodei, node[nodei].acc.getAttribute("data-value"), dst);
+    } else if (src === "nil") {
+      TIS.mov(nodei, "0", dst);
     } else {
       throw new SyntaxError('invalid expression "' + src + '"');
     }
