@@ -131,7 +131,10 @@ var TIS = {
       .replace(/\(([0-9]+)\)/, "$1");
   },
   setAcc: function (nodei, src) {
-    node[nodei].acc.setAttribute("data-value", src);
+    src = parseInt(src);
+    if (src > 999) src = 999;
+    if (src < -999) src = -999;
+    node[nodei].acc.setAttribute("data-value", src.toString());
   },
   setBak: function (nodei, src) {
     node[nodei].bak.setAttribute("data-value", src);
