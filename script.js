@@ -1,5 +1,11 @@
 /* This file is licensed under the MIT License. See LICENSE for details. */
 
+/*
+ * TODO:
+ * - ANY, LAST pseudoports
+ * - Jump commands (JMP, JEZ, JNZ, JGZ, JLZ, JRO)
+ */
+
 var node = [];
 var save = [];
 
@@ -118,6 +124,11 @@ var TIS = {
       TIS.sub(nodei, cmd[1]);
     }
 
+    else if (cmd[0] === "neg") {
+      if (cmd.length > 1) throw new SyntaxError("too many operands");
+      TIS.neg(nodei);
+    }
+
     else {
       throw new SyntaxError('invalid opcode "' + cmd[0] + '"');
     }
@@ -215,5 +226,9 @@ var TIS = {
   sub: function (nodei, src) {
     var acc = parseInt(TIS.getAcc(nodei));
     TIS.setAcc(nodei, (acc - parseInt(src)).toString());
+  },
+
+  neg: function (nodei) {
+    TIS.setAcc(nodei, (-parseInt(TIS.getAcc(nodei))).toString());
   }
 };
