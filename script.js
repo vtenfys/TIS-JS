@@ -7,6 +7,7 @@
  */
 
 var node = [];
+var button = [];
 var save = [];
 
 for (let i = 0; i < 12; i += 1) {
@@ -68,6 +69,24 @@ for (let i = 0; i < 12; i += 1) {
     }
   }
 }
+
+for (let i of ["stop", "step", "pause", "run", "fast"]) {
+  button[i] = document.createElement("div");
+  button[i].classList.add("button", i);
+
+  var img = document.createElement("div");
+  img.classList.add("img");
+
+  var text = document.createElement("div");
+  text.classList.add("text");
+  text.textContent = i;
+
+  button[i].appendChild(img);
+  button[i].appendChild(text);
+  document.querySelector("#buttons").appendChild(button[i]);
+}
+button.stop.classList.add("active");
+button.pause.style.display = "none";
 
 if (window.name !== "") {
   save = JSON.parse(window.name);

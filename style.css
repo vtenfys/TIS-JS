@@ -64,7 +64,7 @@ body {
   text-align: center;
   padding-top: 6px;
 }
-.node .data:before { color: darkgrey; }
+.node .data:before { color: darkgray; }
 .node .data:after { content: attr(data-value); }
 
 .node .acc { top: 1px; padding-top: 7px; height: 29px; }
@@ -105,3 +105,53 @@ body {
   top: -31px;
   left: 119px;
 }
+
+#buttons {
+  position: absolute;
+  bottom: 29px;
+  left: 25px;
+  width: 299px;
+  height: 63px;
+}
+
+.button {
+  width: 59px;
+  height: 57px;
+  display: inline-block;
+  border: 3px double white;
+  box-shadow: 3px 3px 0 gray;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+.button.active, .button:active {
+  border: 3px solid white;
+}
+
+.button .img {
+  background-image: url("spritesheet.png");
+  position: absolute;
+}
+
+.button .img {
+  width: 21px;
+  height: 21px;
+  left: 20px;
+  top: 11px;
+}
+
+.button.stop .img { background-position: -20px 0; }
+.button.step .img { height: 23px; background-position: -39px -21px; }
+.button.pause .img { background-position: -34px 0; }
+.button.run .img { background-position: -18px -21px; }
+.button.fast .img { width: 39px; left: 11px; background-position: 0 -21px; }
+
+.button .text {
+  position: absolute;
+  width: 59px;
+  bottom: 4px;
+}
+
+.button.stop, .button.run { margin-right: 13px; }
+.button.stop, .button.stop .text { width: 60px; }
+.button.step, .button.pause { margin-right: 12px; }
