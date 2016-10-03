@@ -72,7 +72,10 @@ if (window.name !== "") {
 
 var TIS = {
   eval: function (nodei, cmd) {
-    cmd = cmd.replace(/((\s)\s+)|,/g, "$2").split(" ");
+    cmd = cmd.replace(/( |,)( |,)+/g, " ");
+    cmd = cmd.replace(/(^ +)|( +$)/g, "")
+
+    cmd = cmd.split(" ");
     if ((!cmd[0][0]) || cmd[0][0] === "#") return;
 
     for (let i = 1; i < cmd.length; i += 1) {
@@ -87,17 +90,47 @@ var TIS = {
       return;
     }
 
-    if (cmd[0] === "mov") {
+    else if (cmd[0] === "mov") {
       if (cmd.length < 3) throw new SyntaxError("missing operand");
       if (cmd.length > 3) throw new SyntaxError("too many operands");
       TIS.mov(nodei, cmd[1], cmd[2]);
     }
 
-    if (cmd[0] === "swp") {
+    else if (cmd[0] === "swp") {
       if (cmd.length > 1) throw new SyntaxError("too many operands");
-      TIS.swp(nodei);
+      TIS.swp(nodei); 
+    }
+
+    else if (cmd[0] === "sav") {
+      if (cmd.length > 1) throw new SyntaxError("too many operands");
+      TIS.sav(nodei);
+    }
+
+    else if (cmd[0] === "add") {
+      if (cmd.length < 2) throw new SyntaxError("missing operand");
+      if (cmd.length > 2) throw new SyntaxError("too many operands");
+      TIS.add(nodei, cmd[1]);
+    }
+
+    else {
+      throw new SyntaxError('invalid opcode "' + cmd[0] + '"');
     }
   },
+
+  getAcc: function (nodei) {
+    return node[nodei].acc.getAttribute("data-value");
+  },
+  getBak: function (nodei) {
+    return node[nodei].bak.getAttribute("data-value")
+      .replace(/\(([0-9]+)\)/, "$1");
+  },
+  setAcc: function (nodei, src) {
+    node[nodei].acc.setAttribute("data-value", src);
+  },
+  setBak: function (nodei, src) {
+    node[nodei].bak.setAttribute("data-value", src);
+  },
+
   mov: function (nodei, src, dst) {
     if (src.match(/^[0-9]+$/)) {
       if (["up", "right", "down", "left"].indexOf(dst) !== -1) {
@@ -152,12 +185,21 @@ var TIS = {
       throw new SyntaxError('invalid expression "' + src + '"');
     }
   },
-  swp: function (nodei) {
-    var acc = node[nodei].acc.getAttribute("data-value");
-    var bak = node[nodei].bak.getAttribute("data-value")
-    bak = bak.replace(/\(([0-9]+)\)/, "$1");
 
-    node[nodei].bak.setAttribute("data-value", "(" + acc + ")");
-    node[nodei].acc.setAttribute("data-value", bak);
+  swp: function (nodei) {
+    var acc = TIS.getAcc(nodei);
+    var bak = TIS.getBak(nodei);
+
+    TIS.setBak(nodei, acc);
+    TIS.setAcc(nodei, bak);
+  },
+
+  sav: function (nodei) {
+    TIS.setBak(nodei, TIS.getAcc(nodei));
+  },
+
+  add: function (nodei, src) {
+    var acc = parseInt(TIS.getAcc(nodei));
+    TIS.setAcc(nodei, (acc + parseInt(src)).toString());
   }
 };
