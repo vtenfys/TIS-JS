@@ -92,6 +92,11 @@ var TIS = {
       if (cmd.length > 3) throw new SyntaxError("too many operands");
       TIS.mov(nodei, cmd[1], cmd[2]);
     }
+
+    if (cmd[0] === "swp") {
+      if (cmd.length > 1) throw new SyntaxError("too many operands");
+      TIS.swp(nodei);
+    }
   },
   mov: function (nodei, src, dst) {
     if (src.match(/^[0-9]+$/)) {
@@ -146,5 +151,13 @@ var TIS = {
     } else {
       throw new SyntaxError('invalid expression "' + src + '"');
     }
+  },
+  swp: function (nodei) {
+    var acc = node[nodei].acc.getAttribute("data-value");
+    var bak = node[nodei].bak.getAttribute("data-value")
+    bak = bak.replace(/\(([0-9]+)\)/, "$1");
+
+    node[nodei].bak.setAttribute("data-value", "(" + acc + ")");
+    node[nodei].acc.setAttribute("data-value", bak);
   }
 };
